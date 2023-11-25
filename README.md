@@ -2,7 +2,9 @@
 CIS477 Group Project : Sentence Creation
 
     Overview:
-        Our idea was to create a model that would take a given sentence with “masked” word and return a list of words that could potentially replace the masked word. After doing some research we discovered that the best type of model to use for this task would be a BERT model. This model is best for this task because it is designed to "understand the meaning of ambiguous language in text by using surrounding text to establish context. While looking into datasets and models we found a good pre-trained BERT model on hugging face. From there we used this model and another dataset to help achieve our end goal. The main issue we faced was figuring out how to use the model for our needed purposes. (reword the ending)
+        Our idea was to create a model that would take a given sentence with “masked” word and return a list of words that could potentially replace the masked word. After doing some research we discovered that the best type of model to use for this task would be a BERT model. This model is best for this task because it is designed to "understand the meaning of ambiguous language in text by using surrounding text to establish context". While looking into datasets and models we found a good pre-trained BERT model on hugging face. From there we used this model and another dataset from hugging face to help achieve our end goal. The main issue we faced was figuring out how to load in other dataset to be able to fine-tune the model.
+
+        Source: https://www.techtarget.com/searchenterpriseai/definition/BERT-language-model 
 
 
     Requirements:
@@ -27,22 +29,22 @@ CIS477 Group Project : Sentence Creation
 
 
     Models:
-        For our project we used a pre-trained transformer BERT language model from hugging face. It is pre-trained on two datasets; wikipedia and bookcorpus. The specific model we chose have multiple variations and we chose bert-base-uncased because it was in english and it wasn't case sensitive.
+        For our project we used a pre-trained transformer BERT language model from hugging face. It is pre-trained on two datasets; wikipedia and bookcorpus. The specific model we chose have multiple variations and we chose bert-base-uncased because it was in english and it wasn't case sensitive. (how it used)
 
         Link to the models Hugging Face entry:
         https://huggingface.co/bert-base-uncased 
 
         Datasets:
-            To further evaluate the model and get it to work with our desired task I found another dataset to fine-tune with and evaluate metrics.
+            To further evaluate the model and get it to work with our desired task I found another dataset to fine-tune and evaluate metrics with. The dataset we used is "c4" dataset from Hugging Face. This dataset comes in 4 variants and we used the "en" varient. We chose this one because it was in enlish and it had been cleaned; there was a "badwords filter".
 
             Link to the dataset's Hugging Face entry:
             https://huggingface.co/datasets/c4 
 
-    Metrics:
+    Metrics: (section left to fi)
         Since the model was pre-trained I just found one additional dataset to be able to fine tune and look at how weel the model did in the training process.
-        how well the model did on the training data and eval data; used a seperate dataset from hugging face for fine-tuning and seeing how well the model did.
+
 
     License:
-
+        There is a license document for the model that can be found in the project under the name 'LICENSE.txt'.
 
 Creators: Avery Harris and Kaylee Odom

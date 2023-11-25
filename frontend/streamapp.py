@@ -95,10 +95,10 @@ st.write("Final Loss:", losses[-1])
 # Metric Section
 st.subheader("Model Metrics")
 
-# with st.spinner("Evaluating on training data..."):
-#     train_metrics = model.evaluate([inputs.input_ids, inputs.attention_mask], inputs.labels)
-# st.write("Training Data Metrics:")
-# st.write("Loss:", train_metrics[0])
+with st.spinner("Evaluating on training data..."):
+    train_metrics = model.evaluate([inputs.input_ids, inputs.attention_mask], inputs.labels)
+st.write("Training Data Metrics:")
+st.write("Loss:", train_metrics[0])
 
 # Real-time Demo
 st.subheader("Real-Time Demonstration")
