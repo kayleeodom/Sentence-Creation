@@ -1,0 +1,7 @@
+tokenizer
+transformers
+datasets
+numpy
+matplotlib
+tensorflow
+streamlit
