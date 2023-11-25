@@ -1,17 +1,6 @@
 # Sentence-Creation
 CIS477 Group Project (Avery Harris and Kaylee Odom)
 
-       
-
-    ReadMe Needs:
-        - how to install python libs
-        - guide on how to run the project (commands needed)
-        - summary of what it does
-        - ML models used and what they are doing
-        - Metrics section
-
-
-ReadMe Info:
 
     Problem/Task:
         Create or work with a machine learning model that takes a given sentence with a "masked" word and returns a list of words that could potentially replace the masked word.
