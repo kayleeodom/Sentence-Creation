@@ -1,19 +1,7 @@
 # Sentence-Creation
-CIS477 Group Project
+CIS477 Group Project (Avery Harris and Kaylee Odom)
 
-                    Overview
-
-BERT is a cutting-edge, state of the art odel that builds upon previous versions.
-
-Things to do/Breakdown 
-    Repo should contain: 
-        - code used to solve the problem
-        - requirements.txt with list of python libs used and how to install them
-        - documents folder: holds images or diagrams generated
-        - code files: used to run the experiment and solve the problem
-        - front end for the user to see and interact with
-
-        
+       
 
     ReadMe Needs:
         - how to install python libs
@@ -25,20 +13,33 @@ Things to do/Breakdown
 
 ReadMe Info:
 
-    Problem:
-        Create a model that would take a given sentence with a "mask" word and return a list of words that could potentially replace the masked work.
+    Problem/Task:
+        Create or work with a machine learning model that takes a given sentence with a "masked" word and returns a list of words that could potentially replace the masked word.
 
 
     Summary
 
     Requirements
-        Some things you need to pip install to run the code/model (all these can be found in the requirements folder)
+        Some things you need to have to be able to run the project. A more broken down list can be found in the requirements folder or this project.
 
         pip install tokenizer
 
+        pip install transformers
+
+        pip install datasets
+
+        pip install numpy
+
+        pip install tensorflow
+
+        In order to present the model and give a front-end view we used streamlit. Streamlit is a ....
+        pip install streamlit
+
+
     Models
-        Will be using a pre-trained BERT language model from hugging face. It is pre-trained on two datasets. Also provide info about what they are doing.
+        For our project we used a pre-trained BERT language model from hugging face. It is pre-trained on two datasets; wikipedia and bookcorpus.
 
     Metrics
+        Since the model was pre-trained I just found one additional dataset to be able to fine tune and look at how weel the model did in the training process.
         how well the model did on the training data and eval data; used a seperate dataset from hugging face for fine-tuning and seeing how well the model did.
 
