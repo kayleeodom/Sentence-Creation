@@ -71,9 +71,6 @@ inputs['labels'] = labels
 # Compile and train the model
 model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001), loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True))
 
-# Training Progress
-st.subheader("Training Progress")
-
 with st.spinner("Training in Progress..."):
     history = model.fit([inputs.input_ids, inputs.attention_mask], inputs.labels, verbose=1, batch_size=14, epochs=2)
 
@@ -98,10 +95,10 @@ st.write("Final Loss:", losses[-1])
 # Metric Section
 st.subheader("Model Metrics")
 
-with st.spinner("Evaluating on training data..."):
-    train_metrics = model.evaluate([inputs.input_ids, inputs.attentiion_mask], inputs.labels)
-st.write("Training Data Metrics:")
-st.write("Loss:", train_metrics[0])
+# with st.spinner("Evaluating on training data..."):
+#     train_metrics = model.evaluate([inputs.input_ids, inputs.attention_mask], inputs.labels)
+# st.write("Training Data Metrics:")
+# st.write("Loss:", train_metrics[0])
 
 # Real-time Demo
 st.subheader("Real-Time Demonstration")
