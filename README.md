@@ -29,7 +29,7 @@ CIS477 Group Project : Sentence Creation
 
 
     Models:
-        For our project we used a pre-trained transformer BERT language model from hugging face. It is pre-trained on two datasets; wikipedia and bookcorpus. The specific model we chose have multiple variations and we chose bert-base-uncased because it was in english and it wasn't case sensitive. (how it used)
+        For our project we used a pre-trained transformer BERT language model from hugging face. It is pre-trained on two datasets; wikipedia and bookcorpus. The specific model we chose have multiple variations and we chose bert-base-uncased because it was in english and it wasn't case sensitive. (What is it doing)
 
         Link to the models Hugging Face entry:
         https://huggingface.co/bert-base-uncased 
@@ -40,7 +40,7 @@ CIS477 Group Project : Sentence Creation
             Link to the dataset's Hugging Face entry:
             https://huggingface.co/datasets/c4 
 
-    Metrics: (section left to fi)
+    Metrics: (section left to finish)
         Since the model was pre-trained I just found one additional dataset to be able to fine tune and look at how weel the model did in the training process.
 
 

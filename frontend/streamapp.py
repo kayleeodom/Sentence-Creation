@@ -68,7 +68,7 @@ labels = tf.convert_to_tensor(labels)
 inputs['input_ids'] = inp_ids
 inputs['labels'] = labels
 
-# Compile and train the model
+# Compile and fine-tune the model
 model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001), loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True))
 
 with st.spinner("Training in Progress..."):
@@ -108,13 +108,21 @@ user_query = st.text_input("Enter your query:")
 if user_query:
     # tokenize the user input
     inp = tokenizer(user_query, return_tensors='tf')
-    mask_loc = np.where(inp.input_ids.numpy()[0] == 103)[0].tolist()
+    mask_indices = tf.where(inp['input_ids'][0] == tokenizer.mask_token_id).numpy()
 
-    # model prediction
-    out = model(inp).logits[0].numpy()
-    predicted_tokens = np.argmax(out[mask_loc], axis=1).tolist()
+    if len(mask_indices) > 0:
+        st.write(f"Detected {len(mask_indices)} [MASK] token(s) in the input.")
+        st.write("Predicted words for each [MASK] token:")
 
-    # decode and display predicted tokens
-    predicted_text = tokenizer.decode(predicted_tokens)
-    st.write("Predicted Text", predicted_text)
+        for idx, mask_index in enumerate(mask_indices, 1):
+            # Model prediction
+            out = model(inp).logits[0].numpy()
+            predicted_tokens = np.argsort(out[mask_index[0]])[::-1][:5]  # Get top 5 predicted tokens
+
+            # Decode and display predicted tokens
+            predicted_words = [tokenizer.decode(token) for token in predicted_tokens]
+            st.write(f"{idx}. {predicted_words}")
+
+    else:
+        st.write("No [MASK] token detected in the input. Please include a [MASK] token for prediction.")
 
