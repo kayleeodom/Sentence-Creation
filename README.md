@@ -29,19 +29,16 @@ CIS477 Group Project : Sentence Creation
 
 
     Models:
-        For our project we used a pre-trained transformer BERT language model from hugging face. It is pre-trained on two datasets; wikipedia and bookcorpus. The specific model we chose have multiple variations and we chose bert-base-uncased because it was in english and it wasn't case sensitive. (What is it doing)
+        For our project we used a pre-trained transformer BERT language model from hugging face. It is pre-trained on two datasets; wikipedia and bookcorpus. The specific model we chose has multiple variations and we chose bert-base-uncased because it was in english and it wasn't case sensitive. We then took that pre-trained model and fine-tuned it on a subset of the "c4" dataset. From there it breaks down the dataset to learn and understand the words so when given a sentence with a mask it can give a word to replace the mask.
 
         Link to the models Hugging Face entry:
         https://huggingface.co/bert-base-uncased 
 
-        Datasets:
-            To further evaluate the model and get it to work with our desired task I found another dataset to fine-tune and evaluate metrics with. The dataset we used is "c4" dataset from Hugging Face. This dataset comes in 4 variants and we used the "en" varient. We chose this one because it was in enlish and it had been cleaned; there was a "badwords filter".
 
-            Link to the dataset's Hugging Face entry:
-            https://huggingface.co/datasets/c4 
+    Metrics:
+        Since the model was pre-trained we looked for an additional dataset to use for reporting evaluation metrics. The dataset we decided to use is the "c4" dataset from hugging face. This dataset comes in 4 variants and we used the "en" varient. We chose this one because it was in english and it had been cleaned; it had a "badwordds filter". For our model we evaluated the crossentropy loss between the labels and predictions. This is an important measurement to ensure that the model is learning and will be able to predict the mask.
 
-    Metrics: (section left to finish)
-        Since the model was pre-trained I just found one additional dataset to be able to fine tune and look at how weel the model did in the training process.
+        Link to "c4" dataset: https://huggingface.co/datasets/c4 
 
 
     License:

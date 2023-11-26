@@ -93,8 +93,8 @@ plt.show()
 st.subheader("Epoch Vs. Loss")
 st.pyplot(fig)
 
-# Final loss number
-st.write("Final Loss:", losses[-1])
+# # Final loss number
+# st.write("Final Loss:", losses[-1])
 
 # Metric Section
 st.subheader("Model Metrics")
@@ -105,7 +105,7 @@ st.write("Training Data Metrics:")
 st.write("Loss:", train_metrics)
 
 # # Real-time Demo
-# st.subheader("Real-Time Demonstration")
+st.subheader("Real-Time Demonstration")
 
 # #input section
 # user_query = st.text_input("Enter your sentencce with a [MASK] token:")
