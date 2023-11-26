@@ -9,14 +9,10 @@ import streamlit as st
 # Streamlit App (Setup)
 st.title("Sentence Creation")
 
-@st.cache_data
-def load_model_and_tokenizer():
-    # intializing a BERT model
+with st.spinner("Loading the Pre-trained Model..."):
+    # intializing a BERT model 
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     model = TFBertForMaskedLM.from_pretrained('bert-base-uncased')
-    return tokenizer, model
-
-tokenizer, model = load_model_and_tokenizer()
 
 #model.summary()
 with st.spinner("Loading the Dataset..."):
@@ -107,26 +103,19 @@ st.write("Loss:", train_metrics)
 # # Real-time Demo
 st.subheader("Real-Time Demonstration")
 
-# #input section
-# user_query = st.text_input("Enter your sentencce with a [MASK] token:")
-# if user_query:
-#     # tokenize the user input
-#     inp = tokenizer(user_query, return_tensors='tf')
-#     mask_indices = tf.where(inp['input_ids'][0] == tokenizer.mask_token_id).numpy()
+query = "I [MASK] this dress"
+st.write("Query:" , query)
+inp = tokenizer(query,return_tensors='tf')
 
-#     if len(mask_indices) > 0:
-#         st.write(f"Detected {len(mask_indices)} [MASK] token(s) in the input.")
-#         st.write("Predicted words for each [MASK] token:")
+mask_loc = np.where(inp['input_ids'].numpy()[0] == tokenizer.mask_token_id)[0].tolist()
 
-#         for idx, mask_index in enumerate(mask_indices, 1):
-#             # Model prediction
-#             out = model(inp).logits[0].numpy()
-#             predicted_tokens = np.argsort(out[mask_index[0]])[::-1][:5]  # Get top 5 predicted tokens
+st.write("Masked Token Position:",mask_loc)
+#print(f"Masked Token Position: {mask_loc}")
 
-#             # Decode and display predicted tokens
-#             predicted_words = [tokenizer.decode(token) for token in predicted_tokens]
-#             st.write(f"{idx}. {predicted_words}")
+out = model.predict([inp['input_ids'], inp['attention_mask']])
+predicted_tokens = np.argmax(out['logits'][0][mask_loc],axis=1).tolist()
 
-#     else:
-#         st.write("No [MASK] token detected in the input. Please include a [MASK] token for prediction.")
+predicted_words = tokenizer.decode(predicted_tokens)
+st.write("Predicted Word:", predicted_words)
+#print(f"Predicted Words: {predicted_words}")
 

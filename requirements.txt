@@ -22,4 +22,4 @@ What Python Libraries you need installed
 
 7.) streamlit: pip install streamlit
     - import streamlit as st
-    - to run this and see the actual site type streamlit run streamapp.py in the terminal
+    - to run this and see the actual site type streamlit run frontend/streamapp.py in the terminal
