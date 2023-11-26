@@ -9,10 +9,14 @@ import streamlit as st
 # Streamlit App (Setup)
 st.title("Sentence Creation")
 
-with st.spinner("Loading the Pre-trained Model..."):
-    # intializing a BERT model 
+@st.cache_data
+def load_model_and_tokenizer():
+    # intializing a BERT model
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     model = TFBertForMaskedLM.from_pretrained('bert-base-uncased')
+    return tokenizer, model
+
+tokenizer, model = load_model_and_tokenizer()
 
 #model.summary()
 with st.spinner("Loading the Dataset..."):
@@ -72,7 +76,7 @@ inputs['labels'] = labels
 model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001), loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True))
 
 with st.spinner("Training in Progress..."):
-    history = model.fit([inputs.input_ids, inputs.attention_mask], inputs.labels, verbose=1, batch_size=14, epochs=2)
+    history = model.fit([inputs.input_ids, inputs.attention_mask], inputs.labels, verbose=1, batch_size=14, epochs=4)
 
 #plotting
 losses = history.history['loss']
@@ -98,31 +102,31 @@ st.subheader("Model Metrics")
 with st.spinner("Evaluating on training data..."):
     train_metrics = model.evaluate([inputs.input_ids, inputs.attention_mask], inputs.labels)
 st.write("Training Data Metrics:")
-st.write("Loss:", train_metrics[0])
+st.write("Loss:", train_metrics)
 
-# Real-time Demo
-st.subheader("Real-Time Demonstration")
+# # Real-time Demo
+# st.subheader("Real-Time Demonstration")
 
-#input section
-user_query = st.text_input("Enter your query:")
-if user_query:
-    # tokenize the user input
-    inp = tokenizer(user_query, return_tensors='tf')
-    mask_indices = tf.where(inp['input_ids'][0] == tokenizer.mask_token_id).numpy()
+# #input section
+# user_query = st.text_input("Enter your sentencce with a [MASK] token:")
+# if user_query:
+#     # tokenize the user input
+#     inp = tokenizer(user_query, return_tensors='tf')
+#     mask_indices = tf.where(inp['input_ids'][0] == tokenizer.mask_token_id).numpy()
 
-    if len(mask_indices) > 0:
-        st.write(f"Detected {len(mask_indices)} [MASK] token(s) in the input.")
-        st.write("Predicted words for each [MASK] token:")
+#     if len(mask_indices) > 0:
+#         st.write(f"Detected {len(mask_indices)} [MASK] token(s) in the input.")
+#         st.write("Predicted words for each [MASK] token:")
 
-        for idx, mask_index in enumerate(mask_indices, 1):
-            # Model prediction
-            out = model(inp).logits[0].numpy()
-            predicted_tokens = np.argsort(out[mask_index[0]])[::-1][:5]  # Get top 5 predicted tokens
+#         for idx, mask_index in enumerate(mask_indices, 1):
+#             # Model prediction
+#             out = model(inp).logits[0].numpy()
+#             predicted_tokens = np.argsort(out[mask_index[0]])[::-1][:5]  # Get top 5 predicted tokens
 
-            # Decode and display predicted tokens
-            predicted_words = [tokenizer.decode(token) for token in predicted_tokens]
-            st.write(f"{idx}. {predicted_words}")
+#             # Decode and display predicted tokens
+#             predicted_words = [tokenizer.decode(token) for token in predicted_tokens]
+#             st.write(f"{idx}. {predicted_words}")
 
-    else:
-        st.write("No [MASK] token detected in the input. Please include a [MASK] token for prediction.")
+#     else:
+#         st.write("No [MASK] token detected in the input. Please include a [MASK] token for prediction.")
 
