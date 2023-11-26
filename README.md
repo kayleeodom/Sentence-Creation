@@ -40,6 +40,12 @@ CIS477 Group Project : Sentence Creation
 
         Link to "c4" dataset: https://huggingface.co/datasets/c4 
 
+    Sources/Links:
+     - https://www.analyticsvidhya.com/blog/2022/09/fine-tuning-bert-with-masked-language-modeling/ 
+     - https://huggingface.co/bert-base-uncased
+     - https://huggingface.co/datasets/c4 
+     - https://www.techtarget.com/searchenterpriseai/definition/BERT-language-model 
+
 
     License:
         There is a license document for the model that can be found in the project under the name 'LICENSE.txt'.
