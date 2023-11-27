@@ -72,7 +72,7 @@ inputs['labels'] = labels
 model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001), loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True))
 
 with st.spinner("Training in Progress..."):
-    history = model.fit([inputs.input_ids, inputs.attention_mask], inputs.labels, verbose=1, batch_size=14, epochs=2)
+    history = model.fit([inputs.input_ids, inputs.attention_mask], inputs.labels, verbose=1, batch_size=14, epochs=4)
 
 #plotting
 losses = history.history['loss']
@@ -109,7 +109,7 @@ inp = tokenizer(query,return_tensors='tf')
 
 mask_loc = np.where(inp['input_ids'].numpy()[0] == tokenizer.mask_token_id)[0].tolist()
 
-st.write("Masked Token Position:",mask_loc)
+#st.write("Masked Token Position:",mask_loc)
 #print(f"Masked Token Position: {mask_loc}")
 
 out = model.predict([inp['input_ids'], inp['attention_mask']])
