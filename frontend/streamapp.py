@@ -103,7 +103,7 @@ st.write("Loss:", train_metrics)
 # # Real-time Demo
 st.subheader("Real-Time Demonstration")
 
-query = "I [MASK] this dress"
+query = "I [MASK] this dress."
 st.write("Query:" , query)
 inp = tokenizer(query,return_tensors='tf')
 
