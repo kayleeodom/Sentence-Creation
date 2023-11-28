@@ -16,23 +16,25 @@ with st.spinner("Loading the Pre-trained Model..."):
 
 #model.summary()
 with st.spinner("Loading the Dataset..."):
-    # load in the dataset from Hugging Face
+    # load in the dataset
     dataset_name = "c4"
-    # choosing which task (english/clean)
     task_name = "en"
-    dataset = load_dataset(dataset_name, task_name, split="validation",streaming=True)
+    dataset = load_dataset(dataset_name, task_name, split="validation", streaming=True)
 
-    # count = 0
-    # for example in dataset:
-    #     if count >= 1000:
-    #         break
-    #     # Process or use the example as needed
-    #     print(example["text"])  # Or perform any other operation
-    #     count += 1
+    # Convert streaming dataset to a list
+    dataset_list = []
 
-    #convert dataset to a list so I can fine tune
+    count = 0
+    for example in dataset:
+        if count >= 1000:
+            break
+        processed_example = {"text": example["text"]}
+        dataset_list.append(processed_example)
 
-    dataset_list = list(dataset)
+        count += 1
+
+    # Now, dataset_list contains the first 1000 examples' text from the streaming dataset
+    print(dataset_list)
 
 # sampleing subset for demonstration purposes
 subset_size = 1000
@@ -74,34 +76,34 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001), loss=tf.
 with st.spinner("Training in Progress..."):
     history = model.fit([inputs.input_ids, inputs.attention_mask], inputs.labels, verbose=1, batch_size=14, epochs=4)
 
-#plotting
-losses = history.history['loss']
-fig = plt.figure(figsize=(5,5))
-ax1 = fig.add_subplot(111)
-ax1.plot(range(len(losses)),losses)
-ax1.set_xlabel("Epochs")
-ax1.set_ylabel("Loss")
-ax1.set_title("Epoch vs Loss")
-plt.grid()
-plt.show()
+# #plotting
+# losses = history.history['loss']
+# fig = plt.figure(figsize=(5,5))
+# ax1 = fig.add_subplot(111)
+# ax1.plot(range(len(losses)),losses)
+# ax1.set_xlabel("Epochs")
+# ax1.set_ylabel("Loss")
+# ax1.set_title("Epoch vs Loss")
+# plt.grid()
+# plt.show()
 
-# Display results on Streamlit
-st.subheader("Epoch Vs. Loss")
-st.pyplot(fig)
+# # Display results on Streamlit
+# st.subheader("Epoch Vs. Loss")
+# st.pyplot(fig)
 
 # # Final loss number
 # st.write("Final Loss:", losses[-1])
 
 # Metric Section
-st.subheader("Model Metrics")
+# st.subheader("Model Metrics")
 
-with st.spinner("Evaluating on training data..."):
-    train_metrics = model.evaluate([inputs.input_ids, inputs.attention_mask], inputs.labels)
-st.write("Training Data Metrics:")
-st.write("Loss:", train_metrics)
+# with st.spinner("Evaluating on training data..."):
+#     train_metrics = model.evaluate([inputs.input_ids, inputs.attention_mask], inputs.labels)
+# st.write("Training Data Metrics:")
+# st.write("Loss:", train_metrics)
 
 # # Real-time Demo
-st.subheader("Real-Time Demonstration")
+st.subheader("Sentence Creator")
 
 query = "I [MASK] this dress."
 st.write("Query:" , query)
