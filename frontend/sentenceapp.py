@@ -2,8 +2,8 @@ from transformers import BertTokenizer, TFBertForMaskedLM
 import tensorflow as tf
 import numpy as np
 #import re
-import matplotlib.pyplot as plt
-from datasets import load_dataset
+#import matplotlib.pyplot as plt
+#from datasets import load_dataset
 import streamlit as st
 
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
