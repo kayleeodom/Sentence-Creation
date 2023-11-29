@@ -30,5 +30,5 @@ if query:
         st.write(f'- {predicted_words}')
 
     # st.subheader(query)
-    # st.snow()
+    st.snow()
 
