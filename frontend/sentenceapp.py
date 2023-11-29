@@ -22,16 +22,12 @@ if query:
 
     out = model.predict([inp['input_ids'], inp['attention_mask']])
     predicted_tokens = np.argmax(out['logits'][0][mask_loc],axis=1)
-
-    predicted_words = tokenizer.decode(predicted_tokens)
-
-    
     
     st.subheader(f"Predicted Words:")
 
     for word in predicted_tokens:
-        pred = tokenizer.decode(word)
-        st.write(f'- {pred}')
+        predicted_words = tokenizer.decode(word)
+        st.write(f'- {predicted_words}')
 
     # st.subheader(query)
     # st.snow()
